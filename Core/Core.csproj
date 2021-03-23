@@ -5,8 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
+    <Compile Remove="Entities\Episodes.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Interfaces\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.4" />
   </ItemGroup>
 
 </Project>
