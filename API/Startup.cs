@@ -35,7 +35,7 @@ namespace API
             services.AddDbContext<AppDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
 
-            services.AddIdentityServices();
+            services.AddIdentityServices(Configuration);
 
             services.AddSwaggerGen(c =>
             {

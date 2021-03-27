@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    class Character
+    public class Character
     {
         public int Id { get; set; }
 
@@ -16,15 +16,21 @@ namespace Core.Entities
 
         public Status Status { get; set; }
 
+        [MaxLength(100)]
         public string Species { get; set; }
 
+        [MaxLength(100)]
         public string Type { get; set; }
 
         public Gender Gender { get; set; }
+        
+        [MaxLength(100)]
         public string ImageUrl { get; set; }
         public Location Location { get; set; }
         public int LocationId { get; set; }
         public List<Episode> Episodes { get; set; } = new();
+
+        public List<AppUser> Users { get; set; } = new();
     }
 
     public enum Gender
