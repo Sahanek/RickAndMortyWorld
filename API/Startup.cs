@@ -1,5 +1,7 @@
 using API.Extensions;
+using Core.Interfaces;
 using Infrastructure.Identity;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,18 +34,16 @@ namespace API
 
             services.AddControllers();
 
+            
+
             services.AddDbContext<AppDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+            
+            services.AddScoped<ITokenService, TokenService>();
 
             services.AddIdentityServices(Configuration);
 
-            services.AddCors(options => {
-                options.AddDefaultPolicy(
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-                    });
-                });
+            services.AddCors(opt => opt.AddDefaultPolicy(p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
             services.AddSwaggerGen(c =>
             {
@@ -67,6 +67,7 @@ namespace API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
