@@ -36,6 +36,17 @@ namespace API.Controllers
         }
 
         [Authorize]
+        [HttpGet("{id}")]
+        public async Task<bool> CheckIfCharacterExists(int id)
+        {
+            var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
+
+            var character = _dbContext.AppUserCharacters.Where(ch => ch.AppUserId == user.Id).FirstOrDefault(x => x.CharacterId == id);
+
+            return character is not null;
+        }
+
+        [Authorize]
         [HttpPost]
         public async Task<Character> AddCharacter(CharacterDto character)
         {
@@ -43,7 +54,7 @@ namespace API.Controllers
             var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
 
             var characterInDb = _dbContext.Characters.FirstOrDefault(c => c.CharacterId == character.Id);
-            if (character is null)
+            if (characterInDb is null)
             {
                 appUserChar = new AppUserCharacter
                 {
