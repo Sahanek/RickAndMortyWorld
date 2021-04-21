@@ -1,5 +1,6 @@
 using API.Extensions;
 using Core.Interfaces;
+using Infrastructure.Data;
 using Infrastructure.Identity;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
@@ -38,7 +39,10 @@ namespace API
 
             services.AddDbContext<AppDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
-            
+
+            services.AddDbContext<LibraryDbContext>(options =>
+               options.UseSqlServer(Configuration.GetConnectionString("LibraryConnection")));
+
             services.AddScoped<ITokenService, TokenService>();
 
             services.AddIdentityServices(Configuration);

@@ -18,8 +18,9 @@ namespace Infrastructure.Identity
                 {
                     Email = "greg@test.com",
                     UserName = "Greg", // DisplayName
-                    PhoneNumber = "577777777"
+                    PhoneNumber = "577777777",
                 };
+                
 
                 await userManager.CreateAsync(user, "ComplexPa$$w0rd");
             }
