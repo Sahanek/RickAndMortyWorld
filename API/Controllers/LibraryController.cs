@@ -81,12 +81,12 @@ namespace API.Controllers
         }
 
         [Authorize]
-        [HttpDelete]
-        public async Task<ActionResult> DeleteCharacterFromLibrary(CharacterDto character)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteCharacterFromLibrary(int id)
         {
             var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
 
-            var appUserCharacter = _dbContext.AppUserCharacters.FirstOrDefault(c => c.CharacterId == character.Id);
+            var appUserCharacter = _dbContext.AppUserCharacters.FirstOrDefault(c => c.CharacterId == id);
 
             _dbContext.AppUserCharacters.Remove(appUserCharacter);
 
