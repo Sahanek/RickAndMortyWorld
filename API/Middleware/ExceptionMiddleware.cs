@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace API.Middleware
 {
+    /// <summary>
+    /// Middleware przechwytujący błędy dla ładniejszego wyświetlania
+    /// </summary>
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;

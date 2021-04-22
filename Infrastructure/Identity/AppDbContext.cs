@@ -9,8 +9,13 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Identity
 {
+    /// <summary>
+    /// Reprezentuje bazę danych z informacjami o użytkowniku.
+    /// Do modyfikowania danych wykorzystuje UserManager i SignInManager
+    /// </summary>
     public class AppDbContext : IdentityDbContext<AppUser>
     {
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
            
@@ -19,10 +24,6 @@ namespace Infrastructure.Identity
         //It is needed otherwise we get error. It's resolving the problem with primary key creating via IdentityUser. 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
-            //builder.Entity<Character2>().Property(e => e.Status).HasConversion<string>();
-            //builder.Entity<Character2>().Property(e => e.Gender).HasConversion<string>();
-            //builder.Entity<AppUserCharacter>().HasKey(uc => new { uc.AppUserId, uc.CharacterId });
             base.OnModelCreating(builder);
         }
     }

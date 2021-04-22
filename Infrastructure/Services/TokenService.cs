@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
+    /// <summary>
+    /// Implementacja zawierająca tworzenie Tokena JWT
+    /// </summary>
     public class TokenService : ITokenService
     {
         private readonly IConfiguration _config;

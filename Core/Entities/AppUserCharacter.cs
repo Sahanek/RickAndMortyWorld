@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
+    /// <summary>
+    /// Klasa reprezentująca Biblioteke użytkownika.
+    /// Reprezentuje relacje pomiędzy userem a Postaciami w jego bibliotece.
+    /// </summary>
     public class AppUserCharacter
     {
         public string AppUserId { get; set; }

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Identity
 {
+    /// <summary>
+    /// Wprowadza do bazy danych początkowego użytkownika.
+    /// </summary>
     public class AppDbContextSeed
     {
         public static async Task SeedUsersAsync(UserManager<AppUser> userManager)

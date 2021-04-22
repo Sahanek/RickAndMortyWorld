@@ -15,6 +15,9 @@ namespace API.Controllers
 {
     public class AccountController : BaseApiController
     {
+        /// <summary>
+        /// UserManager oraz SignInManager używane do zarządzania użytkownikami.
+        /// </summary>
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ITokenService _tokenService;
@@ -27,10 +30,16 @@ namespace API.Controllers
             _tokenService = tokenService;
         }
 
+        /// <summary>
+        /// Funkcja pobiera email z ClaimTypes w tokenie, który przesyłany jest w nagłówku,
+        /// a następnie zwraca na jego podstawie zalogowanego użytkownika
+        /// </summary>
+        /// <returns>Zwraca użytkownika z Tokenem</returns>
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
+            Htt
             var email = User.FindFirstValue(ClaimTypes.Email);
 
             var user = await _userManager.FindByEmailAsync(email);
@@ -43,7 +52,11 @@ namespace API.Controllers
 
         }
 
-
+        /// <summary>
+        /// Funkcja sprawdza czy dany email istnieje w bazie danych
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>true/false</returns>
         [HttpGet("emailexists")]
         [SwaggerOperation(Summary = "e.g. localhost:5001/api/account/emailexists?email=greg@test.com")]
         public async Task<ActionResult<bool>> CheckEmailExistsAsync([FromQuery] string email)
@@ -51,12 +64,22 @@ namespace API.Controllers
             return await _userManager.FindByEmailAsync(email) is not null;
         }
 
+        /// <summary>
+        /// Funkcja służąca do logowania.
+        /// Sprawdza czy użytkownik o takim emailu istnieje
+        /// Następnie sprawdza poprawność hasła
+        /// Jeśli logowanie przemyślnie pomyślnie zwraca usera z Tokenem
+        /// w przeciwnym przypadku Unauthorized lub BadRequest
+        /// </summary>
+        /// <param name="loginDto"></param>
+        /// <returns></returns>
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
+           
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
-            if (user is null) return Unauthorized();// we can do it better ;)
+            if (user is null) return BadRequest();
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
@@ -69,10 +92,17 @@ namespace API.Controllers
                 Token = _tokenService.CreateToken(user),
             };
         }
-
+        /// <summary>
+        /// Tworzy nowego użytkownika jeśli email jest nie zajęty
+        /// zwraca użytkownika wraz z tokenem.
+        /// </summary>
+        /// <param name="registerDto"></param>
+        /// <returns></returns>
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
+            if ((await CheckEmailExistsAsync(registerDto.Email)).Value) return BadRequest();
+
             var user = new AppUser
             {
                 Email = registerDto.Email,

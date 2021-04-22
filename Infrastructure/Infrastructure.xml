@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Infrastructure</name>
+    </assembly>
+    <members>
+        <member name="T:Infrastructure.Data.LibraryDbContext">
+            <summary>
+            Reprezentacja bazy danych
+            przechowuje informacje o bibliotekch ulubionych postaci użytkowników.
+            </summary>
+        </member>
+        <member name="M:Infrastructure.Data.LibraryDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Ustawia klucze obce dla AppUserCharacters, oraz zmienia tryb usuwania,
+            aby nie usunąć postaci z bibliotek innych użytkowników.
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:Infrastructure.Identity.AppDbContext">
+            <summary>
+            Reprezentuje bazę danych z informacjami o użytkowniku.
+            Do modyfikowania danych wykorzystuje UserManager i SignInManager
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Identity.AppDbContextSeed">
+            <summary>
+            Wprowadza do bazy danych początkowego użytkownika.
+            </summary>
+        </member>
+        <member name="T:Infrastructure.Services.TokenService">
+            <summary>
+            Implementacja zawierająca tworzenie Tokena JWT
+            </summary>
+        </member>
+    </members>
+</doc>

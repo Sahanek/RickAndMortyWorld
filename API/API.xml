@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API</name>
+    </assembly>
+    <members>
+        <member name="F:API.Controllers.AccountController._userManager">
+            <summary>
+            UserManager oraz SignInManager używane do zarządzania użytkownikami.
+            </summary>
+        </member>
+        <member name="M:API.Controllers.AccountController.GetCurrentUser">
+            <summary>
+            Funkcja pobiera email z ClaimTypes w tokenie, który przesyłany jest w nagłówku,
+            a następnie zwraca na jego podstawie zalogowanego użytkownika
+            </summary>
+            <returns>Zwraca użytkownika z Tokenem</returns>
+        </member>
+        <member name="M:API.Controllers.AccountController.CheckEmailExistsAsync(System.String)">
+            <summary>
+            Funkcja sprawdza czy dany email istnieje w bazie danych
+            </summary>
+            <param name="email"></param>
+            <returns>true/false</returns>
+        </member>
+        <member name="M:API.Controllers.AccountController.Login(API.Dtos.LoginDto)">
+            <summary>
+            Funkcja służąca do logowania.
+            Sprawdza czy użytkownik o takim emailu istnieje
+            Następnie sprawdza poprawność hasła
+            Jeśli logowanie przemyślnie pomyślnie zwraca usera z Tokenem
+            w przeciwnym przypadku Unauthorized lub BadRequest
+            </summary>
+            <param name="loginDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.AccountController.Register(API.Dtos.RegisterDto)">
+            <summary>
+            Tworzy nowego użytkownika jeśli email jest nie zajęty
+            zwraca użytkownika wraz z tokenem.
+            </summary>
+            <param name="registerDto"></param>
+            <returns></returns>
+        </member>
+        <member name="T:API.Controllers.LibraryController">
+            <summary>
+            Controller zarządzający bibliotekami użytkownika.
+            </summary>
+        </member>
+        <member name="M:API.Controllers.LibraryController.GetCharacters">
+            <summary>
+            Zwraca listę id ulubionych bohaterów, dla aktualnie zalogowanego użytkownika.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.LibraryController.CheckIfCharacterExists(System.Int32)">
+            <summary>
+            GET: ../api/library/{id}
+            Sprawdza czy dany bohater jest już w bibliotece aktualnego użytkownika.
+            </summary>
+            <param name="id">id bohatera do sprawdzenia czy istnieje w bibliotece użytkownika</param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.LibraryController.AddCharacter(API.Dtos.CharacterDto)">
+            <summary>
+            Dodaje do aktualnie zalogowanego użytkownika biblioteki, bohatera.
+            Jeśli ktoś dodał wcześniej bohatera do własnej biblioteki, będzie on już w bazie danych i zostanie mu przypisany.
+            </summary>
+            <param name="character">id bohatera do dodania w formacie JSON</param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.LibraryController.DeleteCharacterFromLibrary(System.Int32)">
+            <summary>
+            Usuwa z aktualnie zalogowanego użytkownika biblioteki bohatera o podanym id
+            </summary>
+            <param name="id"> id bohatera do usunięcia</param>
+            <returns></returns>
+        </member>
+        <member name="T:API.Dtos.CharacterDto">
+            <summary>
+            Klasa ddo przechwytywania id bohatera do dodania w bibliotece.
+            </summary>
+        </member>
+        <member name="P:API.Dtos.LoginDto.Email">
+            <summary>
+            Informacje potrzebne do zalogowania
+            </summary>
+        </member>
+        <member name="P:API.Dtos.RegisterDto.UserName">
+            <summary>
+            Informacje potrzebne do Rejestracji
+            </summary>
+        </member>
+        <member name="T:API.Errors.ApiError">
+            <summary>
+            Klasa przetwarzająca błędy do ich lepszego wyświetlania.
+            </summary>
+        </member>
+        <member name="T:API.Extensions.IdentityServiceExtensions">
+            <summary>
+            Klasa zarządzająca wprowadzeniem wszystkich potrzebnych elementów do funkcjonowania Identity.
+            Klasa również przypisuje JWT jako sposób autentykacji
+            </summary>
+        </member>
+        <member name="T:API.Middleware.ExceptionMiddleware">
+            <summary>
+            Middleware przechwytujący błędy dla ładniejszego wyświetlania
+            </summary>
+        </member>
+    </members>
+</doc>

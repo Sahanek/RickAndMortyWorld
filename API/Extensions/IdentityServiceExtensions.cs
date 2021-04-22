@@ -13,6 +13,11 @@ using System.Threading.Tasks;
 
 namespace API.Extensions
 {
+
+    /// <summary>
+    /// Klasa zarządzająca wprowadzeniem wszystkich potrzebnych elementów do funkcjonowania Identity.
+    /// Klasa również przypisuje JWT jako sposób autentykacji
+    /// </summary>
     public static class IdentityServiceExtensions
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
@@ -38,6 +43,7 @@ namespace API.Extensions
                         ValidateAudience = false
                     };
                 });
+
             services.Configure<IdentityOptions>(options =>
             {
                 options.User.RequireUniqueEmail = true;

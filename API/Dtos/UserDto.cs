@@ -7,6 +7,7 @@ namespace API.Dtos
 {
     public class UserDto
     {
+        //Informacje zwracane na frontend
         public string UserName { get; set; }
         public string Email { get; set; }
         public string Token { get; set; }

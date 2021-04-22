@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Core</name>
+    </assembly>
+    <members>
+        <member name="T:Core.Entities.AppUserCharacter">
+            <summary>
+            Klasa reprezentująca Biblioteke użytkownika.
+            Reprezentuje relacje pomiędzy userem a Postaciami w jego bibliotece.
+            </summary>
+        </member>
+        <member name="T:Core.Entities.Character">
+            <summary>
+            Przechowuje wartość id postaci. Następcie na frontendzie jest pobierana dana postać z api.
+            </summary>
+        </member>
+        <member name="P:Core.Entities.Character.AppUsers">
+            <summary>
+            JsonIgnore potrzebny aby przy dodwaniu nie wchodzić w pętle.
+            </summary>
+        </member>
+        <member name="T:Core.Interfaces.ITokenService">
+            <summary>
+            interfejs reprezentujacy Service tworzący token.
+            Przydatny w przypadku używania Dependency Injection
+            </summary>
+        </member>
+    </members>
+</doc>

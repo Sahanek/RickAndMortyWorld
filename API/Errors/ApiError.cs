@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace API.Errors
 {
+    /// <summary>
+    /// Klasa przetwarzająca błędy do ich lepszego wyświetlania.
+    /// </summary>
     public class ApiError
     {
         public int StatusCode { get; set; }

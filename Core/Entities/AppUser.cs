@@ -13,6 +13,5 @@ namespace Core.Entities
     {
         //UserName is DisplayName not need another property
 
-        //+ some related entites with user e.g. Character Library 
     }
 }

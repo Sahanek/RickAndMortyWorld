@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
+    /// <summary>
+    /// Controller zarządzający bibliotekami użytkownika.
+    /// </summary>
     public class LibraryController : BaseApiController
     {
         private readonly LibraryDbContext _dbContext;
@@ -25,16 +28,26 @@ namespace API.Controllers
             _userManager = userManager;
         }
 
-        // GET: LibraryController
+        /// <summary>
+        /// Zwraca listę id ulubionych bohaterów, dla aktualnie zalogowanego użytkownika.
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
         [HttpGet]
         public async Task<List<int>> GetCharacters()
         {
             var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
 
-            return _dbContext.AppUserCharacters.Where(ch => ch.AppUserId == user.Id).Select(x => x.Character.Id).ToList();
+            return _dbContext.AppUserCharacters.Where(ch => ch.AppUserId == user.Id).Select(x => x.Character.CharacterId).ToList();
         }
 
+
+        /// <summary>
+        /// GET: ../api/library/{id}
+        /// Sprawdza czy dany bohater jest już w bibliotece aktualnego użytkownika.
+        /// </summary>
+        /// <param name="id">id bohatera do sprawdzenia czy istnieje w bibliotece użytkownika</param>
+        /// <returns></returns>
         [Authorize]
         [HttpGet("{id}")]
         public async Task<bool> CheckIfCharacterExists(int id)
@@ -45,6 +58,13 @@ namespace API.Controllers
 
             return character is not null;
         }
+
+        /// <summary>
+        /// Dodaje do aktualnie zalogowanego użytkownika biblioteki, bohatera.
+        /// Jeśli ktoś dodał wcześniej bohatera do własnej biblioteki, będzie on już w bazie danych i zostanie mu przypisany.
+        /// </summary>
+        /// <param name="character">id bohatera do dodania w formacie JSON</param>
+        /// <returns></returns>
 
         [Authorize]
         [HttpPost]
@@ -80,6 +100,11 @@ namespace API.Controllers
             return appUserChar.Character;
         }
 
+        /// <summary>
+        /// Usuwa z aktualnie zalogowanego użytkownika biblioteki bohatera o podanym id
+        /// </summary>
+        /// <param name="id"> id bohatera do usunięcia</param>
+        /// <returns></returns>
         [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteCharacterFromLibrary(int id)
@@ -87,6 +112,8 @@ namespace API.Controllers
             var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
 
             var appUserCharacter = _dbContext.AppUserCharacters.FirstOrDefault(c => c.CharacterId == id);
+
+            if (appUserCharacter is null) return BadRequest();
 
             _dbContext.AppUserCharacters.Remove(appUserCharacter);
 
