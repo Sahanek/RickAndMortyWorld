@@ -39,7 +39,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-            Htt
+
             var email = User.FindFirstValue(ClaimTypes.Email);
 
             var user = await _userManager.FindByEmailAsync(email);

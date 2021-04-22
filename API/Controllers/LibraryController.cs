@@ -54,7 +54,10 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
 
-            var character = _dbContext.AppUserCharacters.Where(ch => ch.AppUserId == user.Id).FirstOrDefault(x => x.CharacterId == id);
+            var characterDb = _dbContext.Characters.FirstOrDefault(x => x.CharacterId == id);
+
+            var character = _dbContext.AppUserCharacters.Where(ch => ch.AppUserId == user.Id)
+                .FirstOrDefault(x => x.CharacterId == characterDb.Id);
 
             return character is not null;
         }
@@ -111,7 +114,10 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
 
-            var appUserCharacter = _dbContext.AppUserCharacters.FirstOrDefault(c => c.CharacterId == id);
+            var character = _dbContext.Characters.FirstOrDefault(x => x.CharacterId == id);
+
+            var appUserCharacter = _dbContext.AppUserCharacters.Where(ch => ch.AppUserId == user.Id)
+                .FirstOrDefault(x => x.CharacterId == character.Id);
 
             if (appUserCharacter is null) return BadRequest();
 
