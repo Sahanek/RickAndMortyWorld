@@ -4,10 +4,23 @@
         <name>API</name>
     </assembly>
     <members>
+        <member name="T:API.Controllers.AccountController">
+            <summary>
+            Kontroler dla komunikacji z kontem użytkownika
+            </summary>
+        </member>
         <member name="F:API.Controllers.AccountController._userManager">
             <summary>
             UserManager oraz SignInManager używane do zarządzania użytkownikami.
             </summary>
+        </member>
+        <member name="M:API.Controllers.AccountController.#ctor(Microsoft.AspNetCore.Identity.UserManager{Core.Entities.AppUser},Microsoft.AspNetCore.Identity.SignInManager{Core.Entities.AppUser},Core.Interfaces.ITokenService)">
+            <summary>
+            Konstruktor z wstrzykiwanymi serwisami.
+            </summary>
+            <param name="userManager"></param>
+            <param name="signInManager"></param>
+            <param name="tokenService"></param>
         </member>
         <member name="M:API.Controllers.AccountController.GetCurrentUser">
             <summary>
@@ -42,10 +55,22 @@
             <param name="registerDto"></param>
             <returns></returns>
         </member>
+        <member name="T:API.Controllers.BaseApiController">
+            <summary>
+            Bazowy kontroller do dziedziczania.
+            </summary>
+        </member>
         <member name="T:API.Controllers.LibraryController">
             <summary>
             Controller zarządzający bibliotekami użytkownika.
             </summary>
+        </member>
+        <member name="M:API.Controllers.LibraryController.#ctor(Infrastructure.Data.LibraryDbContext,Microsoft.AspNetCore.Identity.UserManager{Core.Entities.AppUser})">
+            <summary>
+            Konstruktor z wstrzykiwanymi zależnościami
+            </summary>
+            <param name="dbContext"></param>
+            <param name="userManager"></param>
         </member>
         <member name="M:API.Controllers.LibraryController.GetCharacters">
             <summary>
@@ -78,17 +103,67 @@
         </member>
         <member name="T:API.Dtos.CharacterDto">
             <summary>
-            Klasa ddo przechwytywania id bohatera do dodania w bibliotece.
+            Klasa do przechwytywania id bohatera do dodania w bibliotece.
             </summary>
         </member>
-        <member name="P:API.Dtos.LoginDto.Email">
+        <member name="P:API.Dtos.CharacterDto.Id">
+            <summary>
+            Id bohatera do dodania do listy
+            </summary>
+        </member>
+        <member name="T:API.Dtos.LoginDto">
             <summary>
             Informacje potrzebne do zalogowania
             </summary>
         </member>
-        <member name="P:API.Dtos.RegisterDto.UserName">
+        <member name="P:API.Dtos.LoginDto.Email">
+            <summary>
+            Email potrzebny do zalogowania
+            </summary>
+        </member>
+        <member name="P:API.Dtos.LoginDto.Password">
+            <summary>
+            hasło
+            </summary>
+        </member>
+        <member name="T:API.Dtos.RegisterDto">
             <summary>
             Informacje potrzebne do Rejestracji
+            </summary>
+        </member>
+        <member name="P:API.Dtos.RegisterDto.UserName">
+            <summary>
+            Nazwa użytkownika musi być unikalna
+            </summary>        
+        </member>
+        <member name="P:API.Dtos.RegisterDto.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:API.Dtos.RegisterDto.Password">
+            <summary>
+            Hasło
+            </summary>
+        </member>
+        <member name="T:API.Dtos.UserDto">
+            <summary>
+            Informacje zwracane na frontend
+            </summary>
+        </member>
+        <member name="P:API.Dtos.UserDto.UserName">
+            <summary>
+            Nazwa użytkownika
+            </summary>
+        </member>
+        <member name="P:API.Dtos.UserDto.Email">
+            <summary>
+            Email użytkownika
+            </summary>
+        </member>
+        <member name="P:API.Dtos.UserDto.Token">
+            <summary>
+            Token indywidualny dla użytkownika
             </summary>
         </member>
         <member name="T:API.Errors.ApiError">
@@ -96,16 +171,113 @@
             Klasa przetwarzająca błędy do ich lepszego wyświetlania.
             </summary>
         </member>
+        <member name="P:API.Errors.ApiError.StatusCode">
+            <summary>
+            Kod błędu
+            </summary>
+        </member>
+        <member name="P:API.Errors.ApiError.Message">
+            <summary>
+            Wiadomość
+            </summary>
+        </member>
+        <member name="M:API.Errors.ApiError.#ctor">
+            <summary>
+            pusty konstruktor
+            </summary>
+        </member>
+        <member name="M:API.Errors.ApiError.#ctor(System.Int32,System.String)">
+            <summary>
+            przypisuje wiadomość lub wiadomość odpowiednią dla błędu jeśli takiej nie ma
+            </summary>
+            <param name="statusCode"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:API.Errors.ApiError.ToString">
+            <summary>
+            Serializuje obiekt na jsona.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:API.Extensions.IdentityServiceExtensions">
             <summary>
             Klasa zarządzająca wprowadzeniem wszystkich potrzebnych elementów do funkcjonowania Identity.
             Klasa również przypisuje JWT jako sposób autentykacji
             </summary>
         </member>
+        <member name="M:API.Extensions.IdentityServiceExtensions.AddIdentityServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Dodaje serwis identyfikujący użytkowników.
+            </summary>
+            <param name="services"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:API.Middleware.ExceptionMiddleware">
             <summary>
             Middleware przechwytujący błędy dla ładniejszego wyświetlania
             </summary>
+        </member>
+        <member name="M:API.Middleware.ExceptionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:API.Middleware.ExceptionMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+             Przechwytuje i przetwarza błędy w przystępnej formie.
+            </summary>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="T:API.Program">
+            <summary>
+            Główny program
+            </summary>
+        </member>
+        <member name="M:API.Program.Main(System.String[])">
+            <summary>
+            Tworzy Hosta, wpisuje użytkownika do bazy jeśli takiego nie ma
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Tworzy hosta na podstawie klasy Startup.cs
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:API.Startup">
+            <summary>
+            Klasa konfigurująca aplikacje oraz serwisy.
+            </summary>
+        </member>
+        <member name="M:API.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:API.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:API.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Metoda wywyoływana przy uruchumieniu. Dołącza seriwsy do programu
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:API.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Metoda konfigujuę HTTP request pipline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
         </member>
     </members>
 </doc>

@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
+    /// <summary>
+    /// Kontroler dla komunikacji z kontem użytkownika
+    /// </summary>
     public class AccountController : BaseApiController
     {
         /// <summary>
@@ -21,7 +24,12 @@ namespace API.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ITokenService _tokenService;
-
+        /// <summary>
+        /// Konstruktor z wstrzykiwanymi serwisami.
+        /// </summary>
+        /// <param name="userManager"></param>
+        /// <param name="signInManager"></param>
+        /// <param name="tokenService"></param>
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, 
             ITokenService tokenService)
         {

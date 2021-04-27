@@ -19,13 +19,20 @@ namespace Infrastructure.Services
     {
         private readonly IConfiguration _config;
         private readonly SymmetricSecurityKey _key;
-
+        /// <summary>
+        /// Wstrzykuje configurację z której pobierane są informacje na temat Tokena
+        /// </summary>
+        /// <param name="config"></param>
         public TokenService(IConfiguration config)
         {
             _config = config;
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Token:Key"]));
         }
-
+        /// <summary>
+        /// Metoda tworząca token.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public string CreateToken(AppUser user)
         {
             var claims = new List<Claim>

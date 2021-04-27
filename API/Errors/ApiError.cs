@@ -11,13 +11,27 @@ namespace API.Errors
     /// </summary>
     public class ApiError
     {
+        /// <summary>
+        /// Kod błędu
+        /// </summary>
         public int StatusCode { get; set; }
+        /// <summary>
+        /// Wiadomość
+        /// </summary>
         public string Message { get; set; }
 
+        /// <summary>
+        /// pusty konstruktor
+        /// </summary>
         public ApiError()
         {
         }
 
+        /// <summary>
+        /// przypisuje wiadomość lub wiadomość odpowiednią dla błędu jeśli takiej nie ma
+        /// </summary>
+        /// <param name="statusCode"></param>
+        /// <param name="message"></param>
         public ApiError(int statusCode, string message = null)
         {
             StatusCode = statusCode;
@@ -38,7 +52,10 @@ namespace API.Errors
                 _ => null
             };
         }
-
+        /// <summary>
+        /// Serializuje obiekt na jsona.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return JsonSerializer.Serialize(this);

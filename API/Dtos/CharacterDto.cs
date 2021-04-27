@@ -8,10 +8,13 @@ using System.Threading.Tasks;
 namespace API.Dtos
 {
     /// <summary>
-    /// Klasa ddo przechwytywania id bohatera do dodania w bibliotece.
+    /// Klasa do przechwytywania id bohatera do dodania w bibliotece.
     /// </summary>
     public class CharacterDto
     {
+        /// <summary>
+        /// Id bohatera do dodania do listy
+        /// </summary>
         [Required]
         public int Id { get; set; }
 

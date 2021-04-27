@@ -20,16 +20,28 @@ using System.Threading.Tasks;
 
 namespace API
 {
+    /// <summary>
+    /// Klasa konfiguruj¹ca aplikacje oraz serwisy.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public IConfiguration Configuration { get; }
+        /// <summary>
+        /// Metoda wywyo³ywana przy uruchumieniu. Do³¹cza seriwsy do programu
+        /// </summary>
+        /// <param name="services"></param>
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -55,7 +67,11 @@ namespace API
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Metoda konfigujuê HTTP request pipline.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors();

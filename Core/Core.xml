@@ -4,15 +4,46 @@
         <name>Core</name>
     </assembly>
     <members>
+        <member name="T:Core.Entities.AppUser">
+            <summary>
+            Klasa dzieczy po Identity User. Dziedziczy z niego wszystkie property.
+            If you want to know more check the implemantation of IdentityUser(Shortcut F12)
+            </summary>
+        </member>
         <member name="T:Core.Entities.AppUserCharacter">
             <summary>
             Klasa reprezentująca Biblioteke użytkownika.
             Reprezentuje relacje pomiędzy userem a Postaciami w jego bibliotece.
             </summary>
         </member>
+        <member name="P:Core.Entities.AppUserCharacter.AppUserId">
+            <summary>
+            Property łączaca z bazą użytkownika
+            </summary>
+        </member>
+        <member name="P:Core.Entities.AppUserCharacter.Character">
+            <summary>
+            Property reprezentująca postać w bibliotece
+            </summary>
+        </member>
+        <member name="P:Core.Entities.AppUserCharacter.CharacterId">
+            <summary>
+            Id bohatera.
+            </summary>
+        </member>
         <member name="T:Core.Entities.Character">
             <summary>
             Przechowuje wartość id postaci. Następcie na frontendzie jest pobierana dana postać z api.
+            </summary>
+        </member>
+        <member name="P:Core.Entities.Character.Id">
+            <summary>
+            Id bohatera w bazie danych
+            </summary>
+        </member>
+        <member name="P:Core.Entities.Character.CharacterId">
+            <summary>
+            Id bohatera w api
             </summary>
         </member>
         <member name="P:Core.Entities.Character.AppUsers">
@@ -25,6 +56,13 @@
             interfejs reprezentujacy Service tworzący token.
             Przydatny w przypadku używania Dependency Injection
             </summary>
+        </member>
+        <member name="M:Core.Interfaces.ITokenService.CreateToken(Core.Entities.AppUser)">
+            <summary>
+            Metoda tworząca token dla wybranego użytkownika
+            </summary>
+            <param name="user"> użytkownik w bazie danych </param>
+            <returns>JWT Token</returns>
         </member>
     </members>
 </doc>

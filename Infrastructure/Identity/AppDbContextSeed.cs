@@ -12,7 +12,11 @@ namespace Infrastructure.Identity
     /// Wprowadza do bazy danych początkowego użytkownika.
     /// </summary>
     public class AppDbContextSeed
-    {
+    {/// <summary>
+    /// Seeduje użytkownika
+    /// </summary>
+    /// <param name="userManager"></param>
+    /// <returns></returns>
         public static async Task SeedUsersAsync(UserManager<AppUser> userManager)
         {
             if (!userManager.Users.Any())

@@ -20,6 +20,12 @@ namespace API.Extensions
     /// </summary>
     public static class IdentityServiceExtensions
     {
+        /// <summary>
+        /// Dodaje serwis identyfikujący użytkowników.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
             //Adds an identity system for App User

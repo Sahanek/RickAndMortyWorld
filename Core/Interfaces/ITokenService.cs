@@ -13,6 +13,11 @@ namespace Core.Interfaces
     /// </summary>
     public interface ITokenService
     {
+        /// <summary>
+        /// Metoda tworząca token dla wybranego użytkownika
+        /// </summary>
+        /// <param name="user"> użytkownik w bazie danych </param>
+        /// <returns>JWT Token</returns>
         string CreateToken(AppUser user);
     }
 }

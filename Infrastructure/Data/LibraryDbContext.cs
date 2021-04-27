@@ -14,11 +14,21 @@ namespace Infrastructure.Data
     /// </summary>
     public class LibraryDbContext : DbContext
     {
+        /// <summary>
+        /// Konstruktor bazowy
+        /// </summary>
+        /// <param name="options"></param>
         public LibraryDbContext(DbContextOptions<LibraryDbContext> options) : base(options)
         {
         }
 
+        /// <summary>
+        /// Reprezentuje tabele łącząca z AppUserem
+        /// </summary>
         public DbSet<AppUserCharacter> AppUserCharacters { get; set; }
+        /// <summary>
+        /// Reprezentuje tabele bohaterów
+        /// </summary>
         public DbSet<Character> Characters { get; set; }
 
         /// <summary>

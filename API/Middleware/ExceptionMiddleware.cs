@@ -17,12 +17,20 @@ namespace API.Middleware
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="next"></param>
         public ExceptionMiddleware(RequestDelegate next)
         {
             _next = next;
         }
 
+        /// <summary>
+        ///  Przechwytuje i przetwarza błędy w przystępnej formie.
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <returns></returns>
         public async Task InvokeAsync(HttpContext httpContext)
         {
             try

@@ -14,8 +14,16 @@ using System.Threading.Tasks;
 
 namespace API
 {
+    /// <summary>
+    /// G³ówny program
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// Tworzy Hosta, wpisuje u¿ytkownika do bazy jeœli takiego nie ma
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
@@ -42,6 +50,11 @@ namespace API
             host.Run();
         }
 
+        /// <summary>
+        /// Tworzy hosta na podstawie klasy Startup.cs
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>

@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    //If you want to know more check the implemantation of IdentityUser(Shortcut F12)
+    /// <summary>
+    /// Klasa dzieczy po Identity User. Dziedziczy z niego wszystkie property.
+    /// If you want to know more check the implemantation of IdentityUser(Shortcut F12)
+    /// </summary>
     public class AppUser : IdentityUser
     {
-        //UserName is DisplayName not need another property
 
     }
 }

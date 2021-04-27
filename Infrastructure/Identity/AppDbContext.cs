@@ -15,13 +15,20 @@ namespace Infrastructure.Identity
     /// </summary>
     public class AppDbContext : IdentityDbContext<AppUser>
     {
-
+        /// <summary>
+        /// Konstruktor bazowy
+        /// </summary>
+        /// <param name="options"></param>
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
            
         }
 
-        //It is needed otherwise we get error. It's resolving the problem with primary key creating via IdentityUser. 
+        /// <summary>
+        /// It is needed otherwise we get error. It's resolving the problem with primary key creating via IdentityUser. 
+        /// </summary>
+        /// <param name="builder"></param>
+ 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

@@ -10,6 +10,22 @@
             przechowuje informacje o bibliotekch ulubionych postaci użytkowników.
             </summary>
         </member>
+        <member name="M:Infrastructure.Data.LibraryDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Infrastructure.Data.LibraryDbContext})">
+            <summary>
+            Konstruktor bazowy
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="P:Infrastructure.Data.LibraryDbContext.AppUserCharacters">
+            <summary>
+            Reprezentuje tabele łącząca z AppUserem
+            </summary>
+        </member>
+        <member name="P:Infrastructure.Data.LibraryDbContext.Characters">
+            <summary>
+            Reprezentuje tabele bohaterów
+            </summary>
+        </member>
         <member name="M:Infrastructure.Data.LibraryDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
             Ustawia klucze obce dla AppUserCharacters, oraz zmienia tryb usuwania,
@@ -23,15 +39,47 @@
             Do modyfikowania danych wykorzystuje UserManager i SignInManager
             </summary>
         </member>
+        <member name="M:Infrastructure.Identity.AppDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Infrastructure.Identity.AppDbContext})">
+            <summary>
+            Konstruktor bazowy
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:Infrastructure.Identity.AppDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            It is needed otherwise we get error. It's resolving the problem with primary key creating via IdentityUser. 
+            </summary>
+            <param name="builder"></param>
+        </member>
         <member name="T:Infrastructure.Identity.AppDbContextSeed">
             <summary>
             Wprowadza do bazy danych początkowego użytkownika.
             </summary>
         </member>
+        <member name="M:Infrastructure.Identity.AppDbContextSeed.SeedUsersAsync(Microsoft.AspNetCore.Identity.UserManager{Core.Entities.AppUser})">
+            <summary>
+            Seeduje użytkownika
+            </summary>
+            <param name="userManager"></param>
+            <returns></returns>
+        </member>
         <member name="T:Infrastructure.Services.TokenService">
             <summary>
             Implementacja zawierająca tworzenie Tokena JWT
             </summary>
+        </member>
+        <member name="M:Infrastructure.Services.TokenService.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Wstrzykuje configurację z której pobierane są informacje na temat Tokena
+            </summary>
+            <param name="config"></param>
+        </member>
+        <member name="M:Infrastructure.Services.TokenService.CreateToken(Core.Entities.AppUser)">
+            <summary>
+            Metoda tworząca token.
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

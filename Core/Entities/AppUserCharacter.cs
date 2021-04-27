@@ -12,9 +12,17 @@ namespace Core.Entities
     /// </summary>
     public class AppUserCharacter
     {
+        /// <summary>
+        /// Property łączaca z bazą użytkownika
+        /// </summary>
         public string AppUserId { get; set; }
+        /// <summary>
+        /// Property reprezentująca postać w bibliotece
+        /// </summary>
         public Character Character { get; set; }
-        
+        /// <summary>
+        /// Id bohatera.
+        /// </summary>
         public int CharacterId { get; set; }
     }
 }

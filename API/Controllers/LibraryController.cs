@@ -22,6 +22,11 @@ namespace API.Controllers
         private readonly LibraryDbContext _dbContext;
         private readonly UserManager<AppUser> _userManager;
 
+        /// <summary>
+        /// Konstruktor z wstrzykiwanymi zależnościami
+        /// </summary>
+        /// <param name="dbContext"></param>
+        /// <param name="userManager"></param>
         public LibraryController(LibraryDbContext dbContext, UserManager<AppUser> userManager)
         {
             _dbContext = dbContext;
